@@ -93,8 +93,6 @@ const LeafletView: React.FC<LeafletViewProps> = ({
 
   const sendMessage = useCallback(
     (payload: MapMessage) => {
-      logMessage(`sending: ${JSON.stringify(payload)}`);
-
       webViewRef.current?.injectJavaScript(
         `window.postMessage(${JSON.stringify(payload)}, '*');`
       );
@@ -125,7 +123,6 @@ const LeafletView: React.FC<LeafletViewProps> = ({
     }
     startupMessage.zoom = zoom;
 
-    sendMessage(startupMessage);
     setInitialized(true);
     logMessage('sending initial message');
   }, [
@@ -147,15 +144,9 @@ const LeafletView: React.FC<LeafletViewProps> = ({
       }
 
       const message: WebviewLeafletMessage = JSON.parse(data);
-      logMessage(`received: ${JSON.stringify(message)}`);
 
-      if (message.msg === WebViewLeafletEvents.MAP_READY) {
-        sendInitialMessage();
-      }
-      if (message.event === WebViewLeafletEvents.ON_MOVE_END) {
-        logMessage(
-          `moved to: ${JSON.stringify(message.payload?.mapCenterPosition)}`
-        );
+      if(event == "onMapClicked"){
+        logMessage(`touch on: ${JSON.stringify(message.payload.touchLatLng)}`);
       }
 
       onMessageReceived && onMessageReceived(message);
