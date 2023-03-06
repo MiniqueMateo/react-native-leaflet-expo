@@ -145,9 +145,7 @@ const LeafletView: React.FC<LeafletViewProps> = ({
 
       const message: WebviewLeafletMessage = JSON.parse(data);
 
-      if(event == "onMapClicked"){
-        logMessage(`touch on: ${JSON.stringify(message.payload.touchLatLng)}`);
-      }
+    
 
       onMessageReceived && onMessageReceived(message);
     },
