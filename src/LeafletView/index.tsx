@@ -6,7 +6,6 @@ import {
   MapMarker,
   WebviewLeafletMessage,
   MapMessage,
-  WebViewLeafletEvents,
   MapLayer,
   MapShape,
   OwnPositionMarker,
@@ -144,8 +143,6 @@ const LeafletView: React.FC<LeafletViewProps> = ({
       }
 
       const message: WebviewLeafletMessage = JSON.parse(data);
-
-    
 
       onMessageReceived && onMessageReceived(message);
     },
